@@ -9,7 +9,18 @@
 
 **Enterprise-grade AI contract intelligence platform.** ContractWatch analyzes contracts for risk, extracts obligations and deadlines, tracks renewal cycles, compares contracts side-by-side, and delivers negotiation intelligence — all from a production-quality SaaS dashboard.
 
-> Portfolio showcase built on realistic mock data. Architected for real LLM + OCR pipeline drop-in. Feels like a $50k/year legal-tech product.
+> Portfolio showcase built on entirely fictional mock data. Architected for real LLM + OCR pipeline drop-in. Demonstrates enterprise frontend and AI-integration engineering skills.
+
+---
+
+## ⚠️ Disclaimer
+
+**This is a portfolio demonstration project, not a legal services product.**
+
+- **All data is fictional.** Every contract, clause, company name, and counterparty in this application is invented for demonstration purposes. Any resemblance to real entities is coincidental.
+- **Not legal advice.** The "AI" risk analysis is a keyword-based heuristic for demo purposes only. It does not constitute legal analysis of any kind.
+- **Not a substitute for counsel.** Never use this tool — or any output it generates — to make decisions about real contracts. Always consult a licensed attorney for actual legal matters.
+- **Engineering showcase only.** This project demonstrates frontend architecture, data visualization, and AI-integration patterns. It is not intended to provide legal services, guidance, or opinions.
 
 ---
 
@@ -108,7 +119,7 @@ The analyzer flags clauses containing:
 | 2 | ProjectFlow SaaS Subscription | SaaS | €8,400 | 65 | ⚠️ Expiring |
 | 3 | Client NDA (Freelance) | NDA | €0 | 12 | Active |
 | 4 | Equipment Rental – Cameras | Vendor | €15,600 | 81 | Active |
-| 5 | Adobe Creative Cloud License | Licensing | €6,240 | 38 | Active |
+| 5 | DesignCloud Creative Suite License | Licensing | €6,240 | 38 | Active |
 | 6 | Marketing Retainer – Digital | Retainer | €36,000 | 74 | Active |
 | 7 | Payment Processing Agreement | Service | €3,600 | 68 | Active |
 | 8 | Co-working Space Membership | Lease | €9,600 | 22 | Active |
