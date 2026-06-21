@@ -57,6 +57,64 @@ const CustomTooltip = ({ active, payload, label }: { active?: boolean; payload?:
   return null
 }
 
+const PIPELINE_STAGES = [
+  { key: 'draft',          label: 'Draft',         color: '#64748B', bg: 'bg-slate-500/10', border: 'border-slate-500/20' },
+  { key: 'active',         label: 'Active',        color: '#10B981', bg: 'bg-emerald/10',   border: 'border-emerald/20' },
+  { key: 'expiring_soon',  label: 'Expiring Soon', color: '#F59E0B', bg: 'bg-amber-dim/40', border: 'border-amber/20' },
+  { key: 'expired',        label: 'Expired',       color: '#EF4444', bg: 'bg-crimson-dim/40', border: 'border-crimson/20' },
+]
+
+function ContractPipeline({ onSelectContract }: { onSelectContract: (id: string) => void }) {
+  const byStatus = PIPELINE_STAGES.map((stage) => ({
+    ...stage,
+    contracts: mockContracts.filter((c) => c.status === stage.key),
+  }))
+
+  return (
+    <div className="bg-slate-dark border border-slate-mid/30 rounded-xl p-6">
+      <div className="flex items-center justify-between mb-4">
+        <h2 className="text-sm font-semibold text-cool-white">Contract Pipeline</h2>
+        <span className="text-xs text-cool-muted font-mono">{mockContracts.length} total</span>
+      </div>
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
+        {byStatus.map((stage, si) => (
+          <div key={stage.key} className={`rounded-lg border ${stage.border} ${stage.bg} p-4`}>
+            <div className="flex items-center justify-between mb-3">
+              <span className="text-[10px] font-semibold tracking-wide uppercase font-mono" style={{ color: stage.color }}>
+                {stage.label}
+              </span>
+              <span className="text-lg font-bold font-mono" style={{ color: stage.color }}>
+                {stage.contracts.length}
+              </span>
+            </div>
+            <div className="space-y-1.5 max-h-28 overflow-y-auto">
+              {stage.contracts.slice(0, 4).map((c) => (
+                <button
+                  key={c.id}
+                  onClick={() => onSelectContract(c.id)}
+                  className="w-full text-left text-[11px] text-cool-muted hover:text-cool-white truncate leading-tight block cursor-pointer transition-colors"
+                >
+                  {c.name}
+                </button>
+              ))}
+              {stage.contracts.length > 4 && (
+                <p className="text-[10px] text-slate-light font-mono">+{stage.contracts.length - 4} more</p>
+              )}
+            </div>
+            {si < PIPELINE_STAGES.length - 1 && (
+              <div className="hidden lg:flex absolute right-0 top-1/2 -translate-y-1/2 translate-x-1/2 z-10">
+                <svg className="w-3 h-3 text-slate-mid" viewBox="0 0 12 12" fill="none" stroke="currentColor" strokeWidth={1.5}>
+                  <path d="M2 6h8M6 2l4 4-4 4" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+              </div>
+            )}
+          </div>
+        ))}
+      </div>
+    </div>
+  )
+}
+
 export default function Dashboard({ onSelectContract }: DashboardProps) {
   const metrics = useMemo(() => calculatePortfolioRisk(mockContracts), [])
 
@@ -229,6 +287,9 @@ export default function Dashboard({ onSelectContract }: DashboardProps) {
           </div>
         </div>
       </div>
+
+      {/* Contract Status Pipeline */}
+      <ContractPipeline onSelectContract={onSelectContract} />
 
       {/* Bottom two-column row */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
